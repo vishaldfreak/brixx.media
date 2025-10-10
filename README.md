@@ -16,10 +16,13 @@ A modern, professional website for Brixx Media LLC, a media buying agency specia
 
 ```
 Brixx.media/
-├── index.html          # Main HTML file
-├── styles.css          # CSS stylesheet with custom styling
-├── script.js           # JavaScript for interactivity
-└── README.md          # This file
+├── index.html              # Main website homepage
+├── privacy-policy.html     # Privacy Policy (required for Facebook ads)
+├── terms-of-service.html   # Terms of Service
+├── data-deletion.html      # Data deletion instructions (required for Facebook)
+├── styles.css              # CSS stylesheet with custom styling
+├── script.js               # JavaScript for interactivity
+└── README.md              # This file
 ```
 
 ## 🎨 Design Elements
@@ -154,6 +157,16 @@ For further optimization:
 For questions or customization help, contact:
 - **Email**: hello@brixxmedia.com
 - **Address**: 1309 Coffeen Avenue STE 1200, Sheridan, WY 82801
+
+## 📱 Facebook Developer Review
+
+For Facebook Ads API and developer review, provide these URLs:
+
+- **Privacy Policy**: `https://yourdomain.com/privacy-policy.html`
+- **Terms of Service**: `https://yourdomain.com/terms-of-service.html`
+- **Data Deletion Instructions**: `https://yourdomain.com/data-deletion.html`
+
+These pages are comprehensive and compliant with Facebook's requirements for app review and advertising API access.
 
 ## 📝 License
 
