@@ -215,5 +215,5 @@ if (emailInput) {
 // Console message for developers
 console.log('%c🚀 Brixx Media LLC', 'font-size: 20px; font-weight: bold; color: #FF6709;');
 console.log('%cExpert Media Buying for Business Growth', 'font-size: 14px; color: #666;');
-console.log('%cInterested in working with us? Visit our website or contact us at hello@brixxmedia.com', 'font-size: 12px; color: #999;');
+console.log('%cInterested in working with us? Visit our website or contact us at hello@brixx.media', 'font-size: 12px; color: #999;');
 

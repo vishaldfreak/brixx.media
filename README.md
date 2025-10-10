@@ -65,7 +65,7 @@ Brixx.media/
 ### Update Company Information
 
 1. **Address**: Edit the contact section in `index.html` (search for "1309 Coffeen Avenue")
-2. **Email**: Update the email address throughout the site (currently set to hello@brixxmedia.com)
+2. **Email**: Update the email address throughout the site (currently set to hello@brixx.media)
 3. **Phone**: Add a phone number in the contact section if needed
 
 ### Modify Content
@@ -155,7 +155,7 @@ For further optimization:
 ## 📞 Support
 
 For questions or customization help, contact:
-- **Email**: hello@brixxmedia.com
+- **Email**: hello@brixx.media
 - **Address**: 1309 Coffeen Avenue STE 1200, Sheridan, WY 82801
 
 ## 📱 Facebook Developer Review
