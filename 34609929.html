@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Proposal - Vishal Sethi | Brixx Media LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            border: 2px solid #3498db;
+            background: transparent;
+            color: #3498db;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .lang-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .lang-btn.active {
+            background: #2c3e50;
+            border-color: #2c3e50;
+            color: white;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            font-weight: 300;
+        }
+        
+        .property-address {
+            font-size: 1.3em;
+            margin: 15px 0;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .proposal-info {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0 30px 0;
+            border-left: 5px solid #3498db;
+            line-height: 1.8;
+        }
+        
+        .language-content {
+            display: none;
+        }
+        
+        .language-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        h4 {
+            color: #2c3e50;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .greeting {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .financial-terms {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .financial-terms h3 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .financial-terms h3:before {
+            content: "💰";
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #fef8e1 100%);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+        
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        ul li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+        
+        ul ul li:before {
+            content: "•";
+            color: #3498db;
+        }
+        
+        ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+        
+        ol li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        ol li:before {
+            content: none;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .signature {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #bdc3c7;
+        }
+        
+        .signature p {
+            margin-bottom: 10px;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .validity {
+            font-style: italic;
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 25px;
+            font-size: 0.95em;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        strong {
+            color: #2c3e50;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .language-selector {
+                margin: 10px;
+                padding: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .container {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .property-address {
+                font-size: 1.1em;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <a href="?lang=en" class="lang-btn" id="btn-en">🇺🇸 English</a>
+        <a href="?lang=pt" class="lang-btn" id="btn-pt">🇵🇹 Português</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 id="main-title">RENTAL PROPOSAL</h1>
+            <div class="property-address" id="property-address">Property: Estrada de Benfica, n. 757, 2o direito</div>
+        </div>
+
+        <div class="content">
+            <!-- English Content -->
+            <div id="content-en" class="language-content active">
+                <div class="proposal-info">
+                    <strong>Date:</strong> November 6, 2025<br>
+                    <strong>From:</strong> Vishal Sethi<br>
+                    <strong>Nationality:</strong> Indian<br>
+                    <strong>To:</strong> Property Owners<br>
+                    <strong>Subject:</strong> Rental Proposal for Apartment at Estrada de Benfica, n. 757, 2o direito<br>
+                    <strong>Idealista Reference:</strong> 34609929
+                </div>
+
+                <p class="greeting">Dear Property Owners,</p>
+                <p>I hope this proposal finds you in good health. My name is <strong>Vishal Sethi</strong>, an Indian national currently residing in Oeiras, Portugal. I am writing to express my sincere interest in renting your beautiful apartment located at <strong>Estrada de Benfica, n. 757, 2o direito</strong> (Idealista Ref. 34609929).</p>
+
+                <h2>ABOUT ME</h2>
+                <h3>Professional Background</h3>
+                <ul>
+                    <li><strong>Company:</strong> Brixx Media LLC (USA registered)</li>
+                    <li><strong>Business:</strong> Independent marketing consultant with stable income</li>
+                    <li><strong>Website:</strong> <a href="https://www.brixx.media">https://www.brixx.media</a></li>
+                    <li><strong>Profile:</strong> <a href="https://www.linkedin.com/in/vishal-sethi30/">LinkedIn Profile</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/vishalsethi30/">Instagram Profile</a></li>
+                </ul>
+
+                <h3>Personal Commitment & Lifestyle</h3>
+                <p>As a results-driven marketing professional, I moved to Portugal under the <strong>Digital Nomad visa</strong> and plan to continue living here long term. I understand the importance of maintaining property in excellent condition and building trustworthy relationships.</p>
+                
+                <h4>Personal Details:</h4>
+                <ul>
+                    <li><strong>Current Residence:</strong> Oeiras, Portugal</li>
+                    <li><strong>Portuguese NIF:</strong> 318747090</li>
+                    <li><strong>Monthly Income:</strong> Approximately €1,500</li>
+                    <li><strong>Lifestyle:</strong> I live alone, do not smoke or drink, and lead a quiet lifestyle</li>
+                    <li><strong>Social Activities:</strong> Occasionally host small dinners with friends but do not hold parties</li>
+                    <li><strong>Work Style:</strong> Work remotely most of the time, requiring a peaceful environment</li>
+                </ul>
+
+                <h2>RENTAL PROPOSAL</h2>
+                <div class="financial-terms">
+                    <h3>Financial Terms</h3>
+                    <ul>
+                        <li><strong>Monthly Rent:</strong> €1,000 per month (utilities and bills paid separately)</li>
+                        <li><strong>Contract Duration:</strong> 12 months (1 year)</li>
+                        <li><strong>Proposed Move-in Date:</strong> November 15, 2025</li>
+                        <li><strong>Payment Structure:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>5 months as rent in advance: €5,000</li>
+                                <li>1 month as security deposit: €1,000</li>
+                            </ul>
+                        </li>
+                        <li><strong>Total Initial Payment:</strong> €6,000</li>
+                        <li><strong>Rent Updates:</strong> Open to annual increases per government regulations</li>
+                    </ul>
+                </div>
+
+                <h2>ADDITIONAL ASSURANCES</h2>
+                <h3>Documentation I Can Provide</h3>
+                <ul>
+                    <li><strong>Business Verification:</strong> Documentation of Brixx Media LLC (USA registered company)</li>
+                    <li><strong>Fixed Monthly Retainer:</strong> Long-term working relationship with DEALSSHUTTER DIGITAL FZCO (Dubai-based company) paying €1,500/month fixed retainer to my Portuguese account. Contract available for review, with increases planned upon renewal</li>
+                    <li><strong>Financial Statements:</strong> Personal and company bank statements showing €1,500+ monthly income</li>
+                    <li><strong>Portuguese Documentation:</strong> NIF certificate (318747090) and local bank account details</li>
+                    <li><strong>Visa Documentation:</strong> Digital Nomad visa and residency permits</li>
+                    <li><strong>Asset Portfolio:</strong> Portfolio of assets in India including equity investments and deposits, plus ownership of my home in India</li>
+                    <li><strong>Guarantor Option:</strong> Sister residing in London, Senior Project Manager at AlphaSight, available as guarantor if needed</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h3>Understanding Your Concerns</h3>
+                    <p>As someone who deeply values stability, respect, and clear communication, I want to assure you that:</p>
+                    <ul>
+                        <li><strong>Payment Reliability:</strong> My advance payment demonstrates financial capability and commitment</li>
+                        <li><strong>Property Respect:</strong> My professional reputation depends on maintaining high standards</li>
+                        <li><strong>Long-term Perspective:</strong> I am seeking a stable home, not a temporary arrangement</li>
+                        <li><strong>Cultural Sensitivity:</strong> I respect Portuguese culture and community values</li>
+                        <li><strong>Furniture Requirements:</strong> As I work from home with a professional setup that includes a 49-inch LED monitor, I would greatly appreciate your assistance with a long work table and chair to accommodate my work needs</li>
+                    </ul>
+                </div>
+
+                <h3>Why This Proposal Benefits You</h3>
+                <h4>Financial Security</h4>
+                <ul>
+                    <li>Immediate receipt of €6,000 advance payment eliminates monthly collection concerns</li>
+                    <li>Substantial security deposit provides additional protection</li>
+                    <li>My stable professional income ensures consistent payment capability</li>
+                </ul>
+
+                <h4>Reliability Assurance</h4>
+                <ul>
+                    <li>Established marketing professional with proven track record</li>
+                    <li>No rental payment delays or property damage in my rental history</li>
+                    <li>Mature, responsible tenant who values property maintenance</li>
+                </ul>
+
+                <h4>Long-term Stability</h4>
+                <ul>
+                    <li>One-year commitment reduces tenant turnover costs</li>
+                    <li>Professional obligations keep me in the area for the foreseeable future</li>
+                    <li>Preference for maintaining long-term, positive relationships</li>
+                </ul>
+
+                <h3>Property Care Commitment</h3>
+                <ul>
+                    <li><strong>Maintenance:</strong> Professional approach to property upkeep and cleanliness</li>
+                    <li><strong>Respect:</strong> Treatment of the property as if it were my own home</li>
+                    <li><strong>Communication:</strong> Open, transparent communication regarding any property matters</li>
+                    <li><strong>Improvements:</strong> Only beneficial modifications with prior approval</li>
+                </ul>
+
+                <h2>NEXT STEPS</h2>
+                <p>I am prepared to:</p>
+                <ol>
+                    <li><strong>Meet in person</strong> to discuss any questions or concerns</li>
+                    <li><strong>Provide all requested documentation</strong> immediately upon agreement</li>
+                    <li><strong>Complete contract signing</strong> and payment transfer within 48 hours</li>
+                    <li><strong>Begin tenancy</strong> at your convenience</li>
+                </ol>
+
+                <h2>CONCLUSION</h2>
+                <p>This proposal represents not just a rental agreement, but a partnership built on mutual respect and financial security. The apartment's layout perfectly suits my remote work lifestyle, and my professional background, substantial advance payment, and long-term commitment address the concerns you may have from previous experiences.</p>
+                
+                <p>I truly love the property and can see myself living there long term. I am confident that this arrangement will provide you with peace of mind while giving me the stable home I am seeking.</p>
+                
+                <p>Thank you for your time and consideration. I look forward to the opportunity to discuss this proposal further and to hopefully become your trusted tenant for the next year.</p>
+
+                <div class="signature">
+                    <p><strong>Best regards,</strong></p>
+                    <p><strong>Vishal Sethi</strong><br>
+                    Affiliate Marketing Specialist<br>
+                    Brixx Media LLC</p>
+                    
+                    <div class="contact-info">
+                        <strong>Contact Information:</strong><br>
+                        Email: Vish@brixx.media<br>
+                        Phone: +351-934407266<br>
+                        LinkedIn: <a href="https://www.linkedin.com/in/vishal-sethi30/">linkedin.com/in/vishal-sethi30</a><br>
+                        Instagram: <a href="https://www.instagram.com/vishalsethi30/">instagram.com/vishalsethi30</a><br>
+                        Website: <a href="https://www.brixx.media">https://www.brixx.media</a>
+                    </div>
+                </div>
+
+                <div class="validity">
+                    <em>This proposal is valid for 30 days from the date above and represents a firm commitment subject to successful property viewing and contract agreement.</em>
+                </div>
+            </div>
+
+            <!-- Portuguese Content -->
+            <div id="content-pt" class="language-content">
+                <div class="proposal-info">
+                    <strong>Data:</strong> 6 de novembro de 2025<br>
+                    <strong>De:</strong> Vishal Sethi<br>
+                    <strong>Nacionalidade:</strong> Indiana<br>
+                    <strong>Para:</strong> Senhores proprietários<br>
+                    <strong>Assunto:</strong> Proposta de arrendamento do apartamento na Estrada de Benfica, n. 757, 2o direito<br>
+                    <strong>Referência Idealista:</strong> 34609929
+                </div>
+
+                <p class="greeting">Excelentíssimos Senhores,</p>
+                <p>Espero que esta proposta os encontre com boa saúde. Sou o <strong>Vishal Sethi</strong>, cidadão indiano residente em Oeiras, Portugal. Venho por este meio manifestar o meu sincero interesse no arrendamento do vosso magnífico apartamento situado na <strong>Estrada de Benfica, n. 757, 2o direito</strong> (Ref. Idealista 34609929).</p>
+
+                <h2>SOBRE MIM</h2>
+                <h3>Perfil Profissional</h3>
+                <ul>
+                    <li><strong>Empresa:</strong> Brixx Media LLC (registada nos EUA)</li>
+                    <li><strong>Atividade:</strong> Consultor de marketing independente com rendimentos estáveis</li>
+                    <li><strong>Website:</strong> <a href="https://www.brixx.media">https://www.brixx.media</a></li>
+                    <li><strong>Perfil:</strong> <a href="https://www.linkedin.com/in/vishal-sethi30/">Perfil LinkedIn</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/vishalsethi30/">Perfil Instagram</a></li>
+                </ul>
+
+                <h3>Compromisso Pessoal e Estilo de Vida</h3>
+                <p>Como profissional de marketing focado em resultados, vim para Portugal ao abrigo do <strong>visto Digital Nomad</strong> e pretendo continuar a viver aqui a longo prazo. Compreendo perfeitamente a importância de manter um imóvel em excelente estado e de construir relações de confiança mútua.</p>
+                
+                <h4>Dados Pessoais:</h4>
+                <ul>
+                    <li><strong>Residência atual:</strong> Oeiras, Portugal</li>
+                    <li><strong>NIF português:</strong> 318747090</li>
+                    <li><strong>Rendimento mensal:</strong> Aproximadamente 1.500€</li>
+                    <li><strong>Estilo de vida:</strong> Vivo sozinho, não fumo nem bebo, e tenho hábitos tranquilos</li>
+                    <li><strong>Vida social:</strong> Por vezes organizo pequenos jantares com amigos, mas não faço festas</li>
+                    <li><strong>Trabalho:</strong> Trabalho remotamente na maior parte do tempo, necessitando de um ambiente sossegado</li>
+                </ul>
+
+                <h2>PROPOSTA DE ARRENDAMENTO</h2>
+                <div class="financial-terms">
+                    <h3>Condições Financeiras</h3>
+                    <ul>
+                        <li><strong>Renda mensal:</strong> 1.000€ por mês (despesas e consumos pagos à parte)</li>
+                        <li><strong>Duração do contrato:</strong> 12 meses (1 ano)</li>
+                        <li><strong>Data de entrada proposta:</strong> 15 de novembro de 2025</li>
+                        <li><strong>Estrutura de pagamento:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>5 meses de renda antecipada: 5.000€</li>
+                                <li>1 mês de depósito de segurança: 1.000€</li>
+                            </ul>
+                        </li>
+                        <li><strong>Pagamento inicial total:</strong> 6.000€</li>
+                        <li><strong>Atualizações de renda:</strong> Disponível para aumentos anuais conforme legislação em vigor</li>
+                    </ul>
+                </div>
+
+                <h2>GARANTIAS ADICIONAIS</h2>
+                <h3>Documentação que Posso Fornecer</h3>
+                <ul>
+                    <li><strong>Comprovação empresarial:</strong> Documentação da Brixx Media LLC (empresa registada nos EUA)</li>
+                    <li><strong>Rendimento Fixo Mensal:</strong> Relação de trabalho de longa duração com a DEALSSHUTTER DIGITAL FZCO (empresa baseada em Dubai) que me paga 1.500€/mês de retainer fixo para a minha conta portuguesa. Contrato disponível para consulta, com aumentos previstos na renovação</li>
+                    <li><strong>Extratos financeiros:</strong> Extratos bancários pessoais e empresariais demonstrando rendimento mensal superior a 1.500€</li>
+                    <li><strong>Documentação portuguesa:</strong> Certificado do NIF (318747090) e dados da conta bancária local</li>
+                    <li><strong>Documentação de visto:</strong> Visto Digital Nomad e autorizações de residência</li>
+                    <li><strong>Portfólio de Ativos:</strong> Portfólio de ativos na Índia incluindo investimentos em ações e depósitos, além da propriedade da minha casa na Índia</li>
+                    <li><strong>Opção de fiador:</strong> Irmã residente em Londres, Gestora de Projetos Sénior na AlphaSight, disponível como fiadora se necessário</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h3>Compreender as Vossas Preocupações</h3>
+                    <p>Como alguém que valoriza profundamente a estabilidade, o respeito e a comunicação clara, quero garantir-vos que:</p>
+                    <ul>
+                        <li><strong>Fiabilidade de Pagamento:</strong> O meu pagamento antecipado demonstra capacidade financeira e compromisso</li>
+                        <li><strong>Respeito pela Propriedade:</strong> A minha reputação profissional depende de manter padrões elevados</li>
+                        <li><strong>Perspetiva de Longo Prazo:</strong> Procuro um lar estável, não um arranjo temporário</li>
+                        <li><strong>Sensibilidade Cultural:</strong> Respeito a cultura portuguesa e os valores da comunidade</li>
+                        <li><strong>Requisitos de Mobiliário:</strong> Como trabalho a partir de casa com uma configuração profissional que inclui um monitor LED de 49 polegadas, agradeceria muito a vossa ajuda com uma mesa de trabalho comprida e cadeira para acomodar as minhas necessidades de trabalho</li>
+                    </ul>
+                </div>
+
+                <h3>Vantagens desta Proposta</h3>
+                <h4>Segurança Financeira</h4>
+                <ul>
+                    <li>Receção imediata de 6.000€ de pagamento antecipado elimina preocupações de cobrança mensal</li>
+                    <li>Depósito substancial oferece proteção adicional</li>
+                    <li>Os meus rendimentos profissionais estáveis garantem capacidade de pagamento consistente</li>
+                </ul>
+
+                <h4>Garantia de Confiabilidade</h4>
+                <ul>
+                    <li>Profissional de marketing estabelecido com historial comprovado</li>
+                    <li>Sem atrasos no pagamento de rendas ou danos em propriedades no meu historial</li>
+                    <li>Inquilino maduro e responsável que valoriza a manutenção do imóvel</li>
+                </ul>
+
+                <h4>Estabilidade a Longo Prazo</h4>
+                <ul>
+                    <li>Compromisso de um ano reduz custos de rotatividade de inquilinos</li>
+                    <li>Obrigações profissionais mantêm-me na zona num futuro previsível</li>
+                    <li>Preferência por manter relações positivas e duradouras</li>
+                </ul>
+
+                <h3>Compromisso de Cuidados com o Imóvel</h3>
+                <ul>
+                    <li><strong>Manutenção:</strong> Abordagem profissional na conservação e limpeza do imóvel</li>
+                    <li><strong>Respeito:</strong> Tratamento do imóvel como se fosse minha própria casa</li>
+                    <li><strong>Comunicação:</strong> Comunicação aberta e transparente sobre qualquer questão relacionada com o imóvel</li>
+                    <li><strong>Melhorias:</strong> Apenas modificações benéficas com aprovação prévia</li>
+                </ul>
+
+                <h2>PRÓXIMOS PASSOS</h2>
+                <p>Estou preparado para:</p>
+                <ol>
+                    <li><strong>Encontrar pessoalmente</strong> para discutir qualquer questão ou preocupação</li>
+                    <li><strong>Fornecer toda a documentação solicitada</strong> imediatamente após acordo</li>
+                    <li><strong>Finalizar a assinatura do contrato</strong> e transferência de pagamento no prazo de 48 horas</li>
+                    <li><strong>Iniciar a ocupação</strong> na vossa conveniência</li>
+                </ol>
+
+                <h2>CONCLUSÃO</h2>
+                <p>Esta proposta representa não apenas um contrato de arrendamento, mas uma parceria baseada no respeito mútuo e segurança financeira. A disposição do apartamento adequa-se perfeitamente ao meu estilo de vida de trabalho remoto, e o meu percurso profissional, pagamento antecipado substancial e compromisso de longo prazo respondem às preocupações que possam ter devido a experiências anteriores.</p>
+                
+                <p>Aprecio verdadeiramente este imóvel e consigo imaginar-me a viver aqui a longo prazo. Estou confiante de que este acordo vos proporcionará tranquilidade, ao mesmo tempo que me oferece o lar estável que procuro.</p>
+                
+                <p>Agradeço o vosso tempo e consideração. Aguardo com expectativa a oportunidade de discutir esta proposta mais detalhadamente e, esperançosamente, tornar-me no vosso inquilino de confiança pelo próximo ano.</p>
+
+                <div class="signature">
+                    <p><strong>Com os melhores cumprimentos,</strong></p>
+                    <p><strong>Vishal Sethi</strong><br>
+                    Especialista em Marketing de Afiliados<br>
+                    Brixx Media LLC</p>
+                    
+                    <div class="contact-info">
+                        <strong>Informações de Contacto:</strong><br>
+                        Email: Vish@brixx.media<br>
+                        Telefone: +351-934407266<br>
+                        LinkedIn: <a href="https://www.linkedin.com/in/vishal-sethi30/">linkedin.com/in/vishal-sethi30</a><br>
+                        Instagram: <a href="https://www.instagram.com/vishalsethi30/">instagram.com/vishalsethi30</a><br>
+                        Website: <a href="https://www.brixx.media">https://www.brixx.media</a>
+                    </div>
+                </div>
+
+                <div class="validity">
+                    <em>Esta proposta é válida por 30 dias a partir da data acima mencionada e representa um compromisso firme sujeito à visita bem-sucedida do imóvel e acordo contratual.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const languages = {
+            en: {
+                title: "RENTAL PROPOSAL",
+                address: "Property: Estrada de Benfica, n. 757, 2o direito"
+            },
+            pt: {
+                title: "PROPOSTA DE ARRENDAMENTO",
+                address: "Propriedade: Estrada de Benfica, n. 757, 2o direito"
+            }
+        };
+
+        // Function to get URL parameter
+        function getUrlParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to switch language
+        function switchLanguage(lang) {
+            // Hide all content
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected language content
+            const selectedContent = document.getElementById(`content-${lang}`);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            } else {
+                // Fallback to English if language not found
+                document.getElementById('content-en').classList.add('active');
+                lang = 'en';
+            }
+            
+            // Update header
+            if (languages[lang]) {
+                document.getElementById('main-title').textContent = languages[lang].title;
+                document.getElementById('property-address').textContent = languages[lang].address;
+            }
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById(`btn-${lang}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            
+            // Update document language attribute
+            document.documentElement.lang = lang;
+
+            // Update URL without reloading the page
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('lang', lang);
+            window.history.replaceState(null, '', newUrl);
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlLang = getUrlParameter('lang');
+            const defaultLang = urlLang && ['en', 'pt'].includes(urlLang) ? urlLang : 'en';
+            switchLanguage(defaultLang);
+        });
+
+        // Add click event listeners to language buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('href').split('=')[1];
+                    switchLanguage(lang);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
