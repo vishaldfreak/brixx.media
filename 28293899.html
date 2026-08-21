@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Proposal - Vishal Sethi | Brixx Media LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: 2px solid #3498db;
+            background: transparent;
+            color: #3498db;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .lang-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: #2c3e50;
+            border-color: #2c3e50;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .property-address {
+            font-size: 1.2em;
+            margin: 15px 0;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .proposal-info {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0 30px 0;
+            border-left: 5px solid #3498db;
+            line-height: 1.8;
+        }
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.7em;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 28px;
+            margin-bottom: 15px;
+            font-size: 1.35em;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .greeting {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .financial-terms {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .financial-terms h3 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .financial-terms h3:before {
+            content: "💰";
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #fef8e1 100%);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        ul li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        ol li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 45px;
+            padding-top: 30px;
+            border-top: 2px solid #bdc3c7;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .validity {
+            font-style: italic;
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 25px;
+            font-size: 0.95em;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+                margin: 10px;
+                padding: 15px;
+                flex-wrap: wrap;
+            }
+
+            .container {
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .property-address {
+                font-size: 1.05em;
+            }
+
+            .content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <a href="?lang=en" class="lang-btn" id="btn-en">🇺🇸 English</a>
+        <a href="?lang=pt" class="lang-btn" id="btn-pt">🇵🇹 Português</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 id="main-title">RENTAL PROPOSAL</h1>
+            <div class="property-address" id="property-address">Property: T2, Martim Moniz, Santa Maria Maior, Lisbon</div>
+        </div>
+
+        <div class="content">
+            <div id="content-en" class="language-content active">
+                <div class="proposal-info">
+                    <strong>Date:</strong> August 21, 2026<br>
+                    <strong>From:</strong> Vishal Sethi<br>
+                    <strong>Nationality:</strong> Indian<br>
+                    <strong>To:</strong> Property Owner<br>
+                    <strong>Subject:</strong> Rental Proposal for T2 at Martim Moniz, Santa Maria Maior, Lisbon<br>
+                    <strong>Idealista Reference:</strong> 28293899
+                </div>
+
+                <p class="greeting">Dear Property Owner,</p>
+                <p>My name is <strong>Vishal Sethi</strong>. I came across your apartment and it immediately stood out to me for its location and overall setup. I can clearly see the care that has gone into maintaining it, which is exactly what I value in a home. I am currently living in Marques de Pombal, Lisboa and looking for a well-located long-term home in central Lisbon. I'm already familiar with the area and can easily see myself living there comfortably.</p>
+
+                <h2>ABOUT ME</h2>
+                <h3>Professional and Personal Profile</h3>
+                <ul>
+                    <li><strong>Company:</strong> Brixx Media LLC (USA registered)</li>
+                    <li><strong>Work:</strong> I specialize in paid digital advertising (Meta and Google Ads) for international clients under fixed monthly retainer contracts</li>
+                    <li><strong>Current Residence:</strong> Marques de Pombal, Lisboa</li>
+                    <li><strong>Time in Portugal:</strong> Living in Portugal since December 2023, fully settled into local day-to-day life</li>
+                    <li><strong>Portuguese NIF:</strong> 318747090</li>
+                    <li><strong>Visa Status:</strong> Digital Nomad visa/residency profile in Portugal</li>
+                    <li><strong>Lifestyle:</strong> Quiet, non-smoker, responsible, and respectful of property and neighbors</li>
+                    <li><strong>Work Style:</strong> Remote work routine focused on stability and a peaceful home environment</li>
+                    <li><strong>Local Professional Routine:</strong> Active in the Lisbon professional ecosystem, including coworking spaces and local business networks</li>
+                    <li><strong>Website:</strong> <a href="https://www.brixx.media">https://www.brixx.media</a></li>
+                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vishal-sethi30/">linkedin.com/in/vishal-sethi30</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/vishalsethi30/">instagram.com/vishalsethi30</a></li>
+                </ul>
+                <p>Outside of work, I focus on maintaining a balanced and healthy lifestyle, which reflects in how I take care of the space I live in.</p>
+
+                <h3>Lifestyle, Routine, and Long-Term Base in Portugal</h3>
+                <p>I live a structured and disciplined lifestyle centered around work, health, and personal growth. My daily routine includes remote work, regular gym training, and quiet evenings at home.</p>
+                <p>I naturally prefer calm, organized environments and keep a predictable daily rhythm. I do not smoke or drink, and I value a clean and peaceful environment while fully respecting neighbors and condominium rules. I also enjoy cooking and occasionally hosting small, calm dinners with close friends.</p>
+                <p>I am building my long-term base in Portugal and I am fully integrated into the local system, including NIF, banking, and social security structure. I am looking for continuity and a stable long-term home.</p>
+
+                <h2>RENTAL PROPOSAL</h2>
+                <div class="financial-terms">
+                    <h3>Financial Terms</h3>
+                    <ul>
+                        <li><strong>Monthly Rent:</strong> EUR 1,500 (as requested)</li>
+                        <li><strong>Security Deposit:</strong> 1 month (as requested)</li>
+                        <li><strong>Move-in Date:</strong> Flexible and available for immediate or agreed move-in date</li>
+                        <li><strong>Contract:</strong> Ready to proceed with owner's preferred contract structure and duration</li>
+                        <li><strong>Utilities:</strong> Paid separately as applicable</li>
+                        <li><strong>Use of Property:</strong> Personal residential use with full care and respect</li>
+                        <li><strong>Payment Discipline:</strong> Commitment to punctual monthly payments by agreed method/date</li>
+                        <li><strong>Financial Safety:</strong> I maintain a solid financial buffer alongside my monthly income, ensuring complete reliability in meeting all rental obligations</li>
+                    </ul>
+                </div>
+
+                <h2>COMMITMENT TO OWNER REQUIREMENTS</h2>
+                <div class="highlight-box">
+                    <h3>Full Alignment with Listing Conditions</h3>
+                    <p>I understand how important it is to have a tenant you can trust, and I take that responsibility seriously.</p>
+                    <p>I confirm that I am prepared to comply with all conditions requested in the listing. I highly value your apartment's furnished and equipped setup, elevator access, private parking space, and open views of Castelo de São Jorge, and I commit to using and maintaining the property with care and professionalism.</p>
+                </div>
+
+                <h3>Documentation I Can Provide Immediately</h3>
+                <ul>
+                    <li>Identification and Portuguese tax documentation</li>
+                    <li>Visa/residency documentation</li>
+                    <li>Proof of professional activity and company registration details</li>
+                    <li>Bank statements and income evidence</li>
+                    <li>Fixed-retainer contract documentation with international client(s)</li>
+                    <li>Portuguese bank account details for payment traceability</li>
+                    <li>Asset overview and additional financial support records (if requested)</li>
+                    <li>Additional supporting documents upon request</li>
+                </ul>
+
+                <h3>Reliability and Property Care Commitment</h3>
+                <ul>
+                    <li>Fully documented tenant with stable income</li>
+                    <li>Clear and proactive communication when needed</li>
+                    <li>I am easy to communicate with and respectful of the owner's time and preferences</li>
+                    <li><strong>Maintenance:</strong> Continuous attention to cleanliness, ventilation, and preventive care</li>
+                    <li><strong>Furniture and Equipment:</strong> Responsible use of all furnished items and appliances</li>
+                    <li><strong>Building Rules:</strong> Full respect for condominium rules, noise standards, and common spaces</li>
+                    <li><strong>Improvements:</strong> No modifications without prior owner approval</li>
+                </ul>
+
+                <h2>NEXT STEPS</h2>
+                <ol>
+                    <li><strong>Share all requested documentation</strong> in organized form without delay</li>
+                    <li><strong>Finalize contract review</strong> according to your standard clauses</li>
+                    <li><strong>Sign the contract and complete payment</strong> promptly after agreement</li>
+                    <li><strong>Move in responsibly</strong> on the agreed date</li>
+                </ol>
+
+                <h2>CONCLUSION</h2>
+                <p>Thank you very much for your consideration. I would be honored to become your tenant and to care for your apartment with full responsibility. My objective is to establish a stable, transparent, and long-term rental relationship that gives you confidence and peace of mind from day one.</p>
+                <p>I am fully available for immediate move-in and ready to proceed quickly with all documentation, contract formalities, and payment steps according to your requirements.</p>
+                <p><strong>I am also happy to provide references from previous landlords if required.</strong></p>
+                <p>I would genuinely value the opportunity to make your apartment my long-term home and care for it with full respect, responsibility, and a smooth, trustworthy relationship.</p>
+
+                <div class="signature">
+                    <p><strong>Best regards,</strong></p>
+                    <p><strong>Vishal Sethi</strong><br>
+                    Marketing Specialist<br>
+                    Brixx Media LLC</p>
+
+                    <div class="contact-info">
+                        <strong>Contact Information:</strong><br>
+                        Email: Vish@brixx.media<br>
+                        Phone: +351-934407266<br>
+                        LinkedIn: <a href="https://www.linkedin.com/in/vishal-sethi30/">linkedin.com/in/vishal-sethi30</a><br>
+                        Instagram: <a href="https://www.instagram.com/vishalsethi30/">instagram.com/vishalsethi30</a><br>
+                        Website: <a href="https://www.brixx.media">https://www.brixx.media</a>
+                    </div>
+                </div>
+
+                <div class="validity">
+                    <em>This proposal is valid for 30 days from the date above and represents a firm commitment subject to contract agreement.</em>
+                </div>
+            </div>
+
+            <div id="content-pt" class="language-content">
+                <div class="proposal-info">
+                    <strong>Data:</strong> 21 de agosto de 2026<br>
+                    <strong>De:</strong> Vishal Sethi<br>
+                    <strong>Nacionalidade:</strong> Indiana<br>
+                    <strong>Para:</strong> Exmo.(a) Proprietário(a)<br>
+                    <strong>Assunto:</strong> Proposta de arrendamento de T2 no Martim Moniz, Santa Maria Maior, Lisboa<br>
+                    <strong>Referência Idealista:</strong> 28293899
+                </div>
+
+                <p class="greeting">Exmo.(a) Proprietário(a),</p>
+                <p>O meu nome é <strong>Vishal Sethi</strong>. O vosso apartamento chamou-me imediatamente a atenção pela localização e pela forma como está apresentado. Nota-se claramente o cuidado na manutenção do imóvel, que é precisamente o que valorizo numa casa. Atualmente resido no Marquês de Pombal, Lisboa, e procuro uma habitação de longo prazo, bem localizada, no centro da cidade. Já conheço bem a zona e consigo ver-me a viver aí com conforto.</p>
+
+                <h2>SOBRE MIM</h2>
+                <h3>Perfil Profissional e Pessoal</h3>
+                <ul>
+                    <li><strong>Empresa:</strong> Brixx Media LLC (registada nos EUA)</li>
+                    <li><strong>Atividade:</strong> Especialista em publicidade digital paga (Meta e Google Ads) para clientes internacionais, com contratos de retainer mensal fixo</li>
+                    <li><strong>Residência atual:</strong> Marquês de Pombal, Lisboa</li>
+                    <li><strong>Tempo em Portugal:</strong> Já residente em Portugal, com rotina estável e integração local consolidada</li>
+                    <li><strong>NIF português:</strong> 318747090</li>
+                    <li><strong>Situação documental:</strong> Perfil de visto/residência Digital Nomad em Portugal</li>
+                    <li><strong>Estilo de vida:</strong> Tranquilo, não fumador, responsável e respeitador do imóvel e da vizinhança</li>
+                    <li><strong>Regime de trabalho:</strong> Trabalho remoto com rotina estável, valorizando um ambiente residencial calmo</li>
+                    <li><strong>Ecossistema profissional local:</strong> Presença ativa no eixo Lisboa/Oeiras, incluindo espaços de coworking e rede profissional local</li>
+                    <li><strong>Website:</strong> <a href="https://www.brixx.media">https://www.brixx.media</a></li>
+                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vishal-sethi30/">linkedin.com/in/vishal-sethi30</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://www.instagram.com/vishalsethi30/">instagram.com/vishalsethi30</a></li>
+                </ul>
+                <p>Fora do trabalho, procuro manter um estilo de vida equilibrado e saudável, o que também se reflete na forma como cuido do espaço onde vivo.</p>
+
+                <h3>Estilo de Vida, Rotina e Projeto de Longo Prazo em Portugal</h3>
+                <p>Tenho um estilo de vida estruturado e disciplinado, centrado no trabalho, saúde e crescimento pessoal. A minha rotina inclui trabalho remoto, treino regular no ginásio e noites tranquilas em casa.</p>
+                <p>Prefiro naturalmente ambientes calmos e organizados, mantendo um ritmo diário previsível.</p>
+                <p>Não fumo nem bebo, valorizo um ambiente limpo e calmo, e cumpro integralmente as regras do condomínio. Gosto também de cozinhar e, ocasionalmente, receber pequenos jantares tranquilos com amigos próximos.</p>
+                <p>Estou a construir a minha base de longo prazo em Portugal e encontro-me totalmente integrado no sistema local, incluindo NIF, banca e enquadramento de segurança social. Procuro continuidade e uma habitação estável de longo prazo.</p>
+
+                <h2>PROPOSTA DE ARRENDAMENTO</h2>
+                <div class="financial-terms">
+                    <h3>Condições Financeiras</h3>
+                    <ul>
+                        <li><strong>Renda mensal:</strong> 1.500 EUR (conforme solicitado)</li>
+                        <li><strong>Caução:</strong> 1 mês (conforme solicitado)</li>
+                        <li><strong>Data de entrada:</strong> Flexível, com disponibilidade para entrada imediata ou em data a acordar</li>
+                        <li><strong>Contrato:</strong> Disponível para avançar com a estrutura e duração contratual preferidas pelo proprietário</li>
+                        <li><strong>Despesas:</strong> Pagas à parte, quando aplicável</li>
+                        <li><strong>Utilização do imóvel:</strong> Habitação própria, com total cuidado e respeito</li>
+                        <li><strong>Disciplina de pagamento:</strong> Compromisso com pagamentos pontuais na data e forma acordadas</li>
+                        <li><strong>Segurança financeira:</strong> Mantenho uma margem financeira sólida, em conjunto com o meu rendimento mensal, garantindo total fiabilidade no cumprimento das obrigações de arrendamento</li>
+                    </ul>
+                </div>
+
+                <h2>COMPROMISSO COM AS EXIGÊNCIAS DO PROPRIETÁRIO</h2>
+                <div class="highlight-box">
+                    <h3>Total Alinhamento com as Condições do Anúncio</h3>
+                    <p>Compreendo como é importante ter um inquilino em quem se possa confiar, e levo essa responsabilidade muito a sério.</p>
+                    <p>Confirmo que estou disponível para cumprir integralmente todas as condições indicadas no anúncio. Valorizo particularmente o facto de o apartamento estar mobilado e equipado, dispor de elevador, lugar de estacionamento privativo e vistas desafogadas sobre o Castelo de São Jorge, comprometendo-me a utilizar e preservar o imóvel com o máximo cuidado e profissionalismo.</p>
+                </div>
+
+                <h3>Documentação Disponível de Imediato</h3>
+                <ul>
+                    <li>Identificação e documentação fiscal portuguesa</li>
+                    <li>Documentação de visto/residência</li>
+                    <li>Comprovativos de atividade profissional e dados da empresa</li>
+                    <li>Extratos bancários e comprovativos de rendimento</li>
+                    <li>Comprovativos de contrato de retainer fixo com cliente(s) internacional(is)</li>
+                    <li>Dados de conta bancária portuguesa para rastreabilidade de pagamentos</li>
+                    <li>Resumo patrimonial e documentação financeira complementar (se solicitado)</li>
+                    <li>Documentação adicional mediante solicitação</li>
+                </ul>
+
+                <h3>Compromisso de Confiança e Conservação do Imóvel</h3>
+                <ul>
+                    <li>Perfil de baixo risco, com documentação completa e rendimento estável</li>
+                    <li>Comunicação clara e proativa quando necessário</li>
+                    <li>Sou fácil de contactar e respeito o tempo e as preferências do proprietário</li>
+                    <li><strong>Manutenção:</strong> Atenção contínua à limpeza, ventilação e conservação preventiva</li>
+                    <li><strong>Mobiliário e equipamentos:</strong> Utilização responsável de todo o recheio e eletrodomésticos</li>
+                    <li><strong>Regras do edifício:</strong> Cumprimento integral das normas do condomínio, ruído e espaços comuns</li>
+                    <li><strong>Alterações:</strong> Sem modificações no imóvel sem autorização prévia do proprietário</li>
+                </ul>
+
+                <h2>PRÓXIMOS PASSOS</h2>
+                <ol>
+                    <li><strong>Enviar toda a documentação solicitada</strong> de forma organizada e sem demora</li>
+                    <li><strong>Concluir revisão contratual</strong> de acordo com as cláusulas habituais do proprietário</li>
+                    <li><strong>Assinar contrato e efetuar pagamento</strong> rapidamente após acordo</li>
+                    <li><strong>Iniciar ocupação responsável</strong> na data acordada</li>
+                </ol>
+
+                <h2>CONCLUSÃO</h2>
+                <p>Muito obrigado pela vossa atenção e consideração. Será um prazer tornar-me vosso inquilino e cuidar do apartamento com total responsabilidade. O meu objetivo é estabelecer uma relação de arrendamento estável, transparente e de longo prazo, transmitindo confiança desde o primeiro dia.</p>
+                <p>Estou totalmente disponível para entrada imediata e para avançar com rapidez em toda a documentação, formalização contratual e etapas de pagamento, de acordo com as vossas exigências.</p>
+                <p>Terei todo o gosto em fornecer referências de senhorios anteriores, caso considerem útil.</p>
+                <p>Valorizaria genuinamente a oportunidade de tornar o vosso apartamento a minha casa de longo prazo, cuidando dele com total respeito, responsabilidade e uma relação de confiança.</p>
+
+                <div class="signature">
+                    <p><strong>Com os melhores cumprimentos,</strong></p>
+                    <p><strong>Vishal Sethi</strong><br>
+                    Especialista em Marketing<br>
+                    Brixx Media LLC</p>
+
+                    <div class="contact-info">
+                        <strong>Informações de Contacto:</strong><br>
+                        Email: Vish@brixx.media<br>
+                        Telefone: +351-934407266<br>
+                        LinkedIn: <a href="https://www.linkedin.com/in/vishal-sethi30/">linkedin.com/in/vishal-sethi30</a><br>
+                        Instagram: <a href="https://www.instagram.com/vishalsethi30/">instagram.com/vishalsethi30</a><br>
+                        Website: <a href="https://www.brixx.media">https://www.brixx.media</a>
+                    </div>
+                </div>
+
+                <div class="validity">
+                    <em>Esta proposta é válida por 30 dias a partir da data acima e representa um compromisso firme, sujeito a acordo contratual.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const languages = {
+            en: {
+                title: "RENTAL PROPOSAL",
+                address: "Property: T2, Martim Moniz, Santa Maria Maior, Lisbon"
+            },
+            pt: {
+                title: "PROPOSTA DE ARRENDAMENTO",
+                address: "Imóvel: T2, Martim Moniz, Santa Maria Maior, Lisboa"
+            }
+        };
+
+        function getUrlParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function switchLanguage(lang) {
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            const selectedContent = document.getElementById(`content-${lang}`);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            } else {
+                document.getElementById('content-en').classList.add('active');
+                lang = 'en';
+            }
+
+            if (languages[lang]) {
+                document.getElementById('main-title').textContent = languages[lang].title;
+                document.getElementById('property-address').textContent = languages[lang].address;
+            }
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById(`btn-${lang}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            document.documentElement.lang = lang;
+
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('lang', lang);
+            window.history.replaceState(null, '', newUrl);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlLang = getUrlParameter('lang');
+            const defaultLang = urlLang && ['en', 'pt'].includes(urlLang) ? urlLang : 'en';
+            switchLanguage(defaultLang);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('href').split('=')[1];
+                    switchLanguage(lang);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
