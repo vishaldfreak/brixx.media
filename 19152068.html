@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Proposal - Vishal Sethi | Brixx Media LLC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .language-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            border: 2px solid #3498db;
+            background: transparent;
+            color: #3498db;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .lang-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .lang-btn.active {
+            background: #2c3e50;
+            border-color: #2c3e50;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        .property-address {
+            font-size: 1.2em;
+            margin: 15px 0;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .proposal-info {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0 30px 0;
+            border-left: 5px solid #3498db;
+            line-height: 1.8;
+        }
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 1.7em;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 28px;
+            margin-bottom: 15px;
+            font-size: 1.35em;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .greeting {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .financial-terms {
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .financial-terms h3 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .financial-terms h3:before {
+            content: "💰";
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #fef8e1 100%);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .option-box {
+            background: linear-gradient(135deg, #eaf2ff 0%, #f5f9ff 100%);
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .option-box h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        ul li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: -20px;
+        }
+
+        ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        ol li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .signature {
+            text-align: center;
+            margin-top: 45px;
+            padding-top: 30px;
+            border-top: 2px solid #bdc3c7;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 1px solid #dee2e6;
+        }
+
+        .validity {
+            font-style: italic;
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 25px;
+            font-size: 0.95em;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .language-selector {
+                margin: 10px;
+                padding: 15px;
+                flex-wrap: wrap;
+            }
+
+            .container {
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .property-address {
+                font-size: 1.05em;
+            }
+
+            .content {
+                padding: 25px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                font-size: 12.6px;
+                line-height: 1.43;
+            }
+
+            .language-selector {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            .header {
+                padding: 14px 16px;
+            }
+
+            .header h1 {
+                font-size: 1.45em;
+            }
+
+            .property-address {
+                font-size: 0.95em;
+                margin: 6px 0 0 0;
+            }
+
+            .content {
+                padding: 14px 16px;
+            }
+
+            .proposal-info,
+            .financial-terms,
+            .highlight-box,
+            .option-box,
+            .contact-info,
+            .validity {
+                margin: 8px 0;
+                padding: 10px 12px;
+            }
+
+            h2 {
+                margin-top: 12px;
+                margin-bottom: 8px;
+                font-size: 1.15em;
+            }
+
+            h3 {
+                margin-top: 10px;
+                margin-bottom: 6px;
+                font-size: 1.05em;
+            }
+
+            p {
+                margin-bottom: 6px;
+                line-height: 1.32;
+            }
+
+            ul, ol {
+                margin: 6px 0;
+                padding-left: 18px;
+            }
+
+            ul li, ol li {
+                margin-bottom: 4px;
+                line-height: 1.3;
+            }
+
+            .signature {
+                margin-top: 14px;
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <a href="?lang=en" class="lang-btn" id="btn-en">🇺🇸 English</a>
+        <a href="?lang=pt" class="lang-btn" id="btn-pt">🇵🇹 Português</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 id="main-title">RENTAL PROPOSAL</h1>
+            <div class="property-address" id="property-address">Property: T2 Martim Moniz, Rossio - Martim Moniz, Lisbon</div>
+        </div>
+
+        <div class="content">
+            <div id="content-en" class="language-content active">
+                <div class="proposal-info">
+                    <strong>Date:</strong> September 23, 2026<br>
+                    <strong>From:</strong> Vishal Sethi<br>
+                    <strong>Nationality:</strong> Indian<br>
+                    <strong>To:</strong> Property Owner<br>
+                    <strong>Subject:</strong> Rental Proposal for T2 in Martim Moniz, Lisbon<br>
+                    <strong>Imovirtual Reference:</strong> 19152068
+                </div>
+
+                <p class="greeting">Dear Property Owner,</p>
+                <p>My name is <strong>Vishal Sethi</strong>. I visited your T2 in Martim Moniz and was genuinely drawn to it — the location, the closed condominium with 24h security, the elevator, and the indoor parking. I currently live in Marquês de Pombal and am looking for a stable, long-term home in central Lisbon. I already know the area well and can easily see myself settling here.</p>
+
+                <h2>ABOUT ME</h2>
+                <p>I run <strong>Brixx Media LLC</strong> (USA), specializing in paid digital advertising for international clients under fixed monthly retainers. I have lived in Portugal since December 2023, hold NIF <strong>318747090</strong>, and am fully integrated locally (banking, tax, and residency). I work remotely, keep a quiet routine, do not smoke, and take good care of the spaces I live in.</p>
+                <p>Website: <a href="https://www.brixx.media">brixx.media</a> · LinkedIn: <a href="https://www.linkedin.com/in/vishal-sethi30/">vishal-sethi30</a> · Instagram: <a href="https://www.instagram.com/vishalsethi30/">vishalsethi30</a></p>
+
+                <h2>RENTAL PROPOSAL</h2>
+                <div class="financial-terms">
+                    <h3>Financial Terms</h3>
+                    <ul>
+                        <li><strong>Monthly rent proposed:</strong> EUR 1,200 (apartment as it currently stands)</li>
+                        <li><strong>Listed rent:</strong> EUR 1,720</li>
+                        <li><strong>Security deposit:</strong> As required by the owner</li>
+                        <li><strong>Contract:</strong> Ready to proceed with your preferred structure and duration</li>
+                        <li><strong>Utilities:</strong> Paid separately, as applicable</li>
+                        <li><strong>Payments:</strong> Punctual, by the agreed method and date</li>
+                    </ul>
+                </div>
+
+                <h2>FURNISHING AND THE BASIS FOR EUR 1,200</h2>
+                <div class="highlight-box">
+                    <h3>A fair proposal for the current condition</h3>
+                    <p>The apartment has a solid foundation — main kitchen appliances, a sofa, a dining set, and one basic bed — but it is not yet a turnkey home. Compared with a fully lived-in apartment (including where I live today), it still needs curtains for privacy with natural light, a complete second bedroom, finishing touches in the first bedroom, everyday kitchen essentials, and a proper living-room setup for daily life.</p>
+                    <p>Bringing it to a comfortable home standard would mean a meaningful personal investment on my side — in the order of several thousand euros. That is why I am proposing <strong>EUR 1,200 per month</strong> for the apartment <strong>as it is</strong>.</p>
+                </div>
+
+                <div class="option-box">
+                    <h3>Happy to discuss either path</h3>
+                    <p><strong>Option A (my preference):</strong> I take the apartment as-is at EUR 1,200 and furnish it myself.</p>
+                    <p><strong>Option B:</strong> If you prefer to fully furnish it to a complete home standard, I am open to discussing a rent closer to the listed amount.</p>
+                </div>
+
+                <h2>AVAILABILITY</h2>
+                <p>Once this proposal is accepted, I will give notice at my current residence. It has a <strong>3-month notice period</strong>, so move-in would follow that timeline. I am happy to agree the exact date together after acceptance.</p>
+
+                <h2>PARKING AND STORAGE</h2>
+                <p>I value the indoor parking space highly. I understand the storage is currently used by the owner. Since there is little storage inside the apartment, I would be grateful if we could discuss a simple shared arrangement for a few luggage bags — always respecting your needs and on terms we both find fair.</p>
+
+                <h2>DOCUMENTATION AND COMMITMENT</h2>
+                <p>I can provide identification, NIF, visa/residency documents, proof of income and professional activity, and Portuguese bank details immediately. I am easy to communicate with, respectful of condominium rules, and committed to caring for the property as my long-term home. Happy to share previous landlord references if useful.</p>
+
+                <h2>NEXT STEPS</h2>
+                <ol>
+                    <li>Align on rent, furnishing path, and storage</li>
+                    <li>Share documentation and review the contract</li>
+                    <li>Sign, complete payment, and set the move-in date after my notice period</li>
+                </ol>
+
+                <h2>CLOSING</h2>
+                <p>Thank you for considering my proposal. I would truly value the chance to make this apartment my home and to build a stable, transparent, long-term relationship with you.</p>
+
+                <div class="signature">
+                    <p><strong>Warm regards,</strong></p>
+                    <p><strong>Vishal Sethi</strong><br>
+                    Marketing Specialist<br>
+                    Brixx Media LLC</p>
+                    <div class="contact-info">
+                        <strong>Contact:</strong><br>
+                        Email: Vish@brixx.media<br>
+                        Phone: +351-934407266<br>
+                        Website: <a href="https://www.brixx.media">https://www.brixx.media</a>
+                    </div>
+                </div>
+
+                <div class="validity">
+                    <em>This proposal is valid for 30 days from the date above and represents a firm commitment subject to contract agreement.</em>
+                </div>
+            </div>
+
+            <div id="content-pt" class="language-content">
+                <div class="proposal-info">
+                    <strong>Data:</strong> 23 de setembro de 2026<br>
+                    <strong>De:</strong> Vishal Sethi<br>
+                    <strong>Nacionalidade:</strong> Indiana<br>
+                    <strong>Para:</strong> Exmo.(a) Proprietário(a)<br>
+                    <strong>Assunto:</strong> Proposta de arrendamento de T2 em Martim Moniz, Lisboa<br>
+                    <strong>Referência Imovirtual:</strong> 19152068
+                </div>
+
+                <p class="greeting">Exmo.(a) Proprietário(a),</p>
+                <p>O meu nome é <strong>Vishal Sethi</strong>. Visitei o vosso T2 no Martim Moniz e senti logo uma ligação genuína — a localização, o condomínio fechado com segurança 24h, o elevador e o estacionamento interior. Atualmente vivo no Marquês de Pombal e procuro uma casa estável de longo prazo no centro de Lisboa. Já conheço bem a zona e consigo imaginar-me a viver aqui com tranquilidade.</p>
+
+                <h2>SOBRE MIM</h2>
+                <p>Dirijo a <strong>Brixx Media LLC</strong> (EUA), especializada em publicidade digital paga para clientes internacionais com contratos de retainer mensal. Vivo em Portugal desde dezembro de 2023, tenho NIF <strong>318747090</strong> e estou plenamente integrado no sistema local (banca, fiscalidade e residência). Trabalho remotamente, tenho uma rotina calma, não fumo e cuido bem dos espaços onde vivo.</p>
+                <p>Website: <a href="https://www.brixx.media">brixx.media</a> · LinkedIn: <a href="https://www.linkedin.com/in/vishal-sethi30/">vishal-sethi30</a> · Instagram: <a href="https://www.instagram.com/vishalsethi30/">vishalsethi30</a></p>
+
+                <h2>PROPOSTA DE ARRENDAMENTO</h2>
+                <div class="financial-terms">
+                    <h3>Condições Financeiras</h3>
+                    <ul>
+                        <li><strong>Renda mensal proposta:</strong> 1.200 EUR (apartamento no estado atual)</li>
+                        <li><strong>Renda anunciada:</strong> 1.720 EUR</li>
+                        <li><strong>Caução:</strong> Conforme exigido pelo proprietário</li>
+                        <li><strong>Contrato:</strong> Disponível para avançar com a estrutura e duração que preferirem</li>
+                        <li><strong>Despesas:</strong> Pagas à parte, quando aplicável</li>
+                        <li><strong>Pagamentos:</strong> Pontuais, na data e forma acordadas</li>
+                    </ul>
+                </div>
+
+                <h2>MOBILAÇÃO E O FUNDAMENTO DOS 1.200 EUR</h2>
+                <div class="highlight-box">
+                    <h3>Uma proposta justa para o estado atual</h3>
+                    <p>O apartamento tem uma boa base — eletrodomésticos principais, sofá, conjunto de sala de jantar e uma cama simples — mas ainda não é uma casa pronta a habitar. Em comparação com um apartamento completamente vivido (incluindo aquele onde vivo hoje), faltam ainda cortinas para privacidade com luz natural, um segundo quarto completo, os acabamentos do primeiro quarto, o essencial do dia a dia na cozinha e uma sala preparada para viver com conforto.</p>
+                    <p>Deixar o imóvel ao nível de uma verdadeira casa implicaria um investimento pessoal significativo da minha parte — na ordem de alguns milhares de euros. É por isso que proponho <strong>1.200 EUR por mês</strong> pelo apartamento <strong>tal como está</strong>.</p>
+                </div>
+
+                <div class="option-box">
+                    <h3>Com todo o gosto em discutir qualquer dos caminhos</h3>
+                    <p><strong>Opção A (a minha preferência):</strong> Aceito o apartamento no estado atual a 1.200 EUR e mobili-o por minha conta.</p>
+                    <p><strong>Opção B:</strong> Se preferirem mobiliar o apartamento de forma completa, estou aberto a discutir uma renda mais próxima do valor anunciado.</p>
+                </div>
+
+                <h2>DISPONIBILIDADE</h2>
+                <p>Assim que esta proposta for aceite, darei o pré-aviso na minha residência atual. Existe um <strong>período de pré-aviso de 3 meses</strong>, pelo que a entrada ficaria alinhada com esse prazo. Terei todo o gosto em acordar a data exacta em conjunto após a aceitação.</p>
+
+                <h2>ESTACIONAMENTO E ARRUMAÇÃO</h2>
+                <p>Valorizo bastante o lugar de estacionamento interior. Compreendo que a arrecadação está atualmente a ser utilizada pelo proprietário. Como há pouca arrumação dentro do apartamento, agradecia que pudéssemos falar de uma partilha simples para algumas malas — sempre com respeito pelas vossas necessidades e em termos justos para ambos.</p>
+
+                <h2>DOCUMENTAÇÃO E COMPROMISSO</h2>
+                <p>Posso disponibilizar de imediato identificação, NIF, documentação de visto/residência, comprovativos de rendimento e atividade profissional, e dados bancários em Portugal. Sou fácil de contactar, respeito as regras do condomínio e comprometo-me a cuidar do imóvel como a minha casa de longo prazo. Terei gosto em partilhar referências de senhorios anteriores, se for útil.</p>
+
+                <h2>PRÓXIMOS PASSOS</h2>
+                <ol>
+                    <li>Alinhar renda, caminho de mobilação e arrumação</li>
+                    <li>Enviar documentação e rever o contrato</li>
+                    <li>Assinar, efectuar o pagamento e definir a data de entrada após o pré-aviso</li>
+                </ol>
+
+                <h2>ENCERRAMENTO</h2>
+                <p>Muito obrigado pela vossa atenção. Valorizaria genuinamente a oportunidade de tornar este apartamento a minha casa e de construir convosco uma relação estável, transparente e de longo prazo.</p>
+
+                <div class="signature">
+                    <p><strong>Com os melhores cumprimentos,</strong></p>
+                    <p><strong>Vishal Sethi</strong><br>
+                    Especialista em Marketing<br>
+                    Brixx Media LLC</p>
+                    <div class="contact-info">
+                        <strong>Contacto:</strong><br>
+                        Email: Vish@brixx.media<br>
+                        Telefone: +351-934407266<br>
+                        Website: <a href="https://www.brixx.media">https://www.brixx.media</a>
+                    </div>
+                </div>
+
+                <div class="validity">
+                    <em>Esta proposta é válida por 30 dias a partir da data acima e representa um compromisso firme, sujeito a acordo contratual.</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const languages = {
+            en: {
+                title: "RENTAL PROPOSAL",
+                address: "Property: T2 Martim Moniz, Rossio - Martim Moniz, Lisbon"
+            },
+            pt: {
+                title: "PROPOSTA DE ARRENDAMENTO",
+                address: "Imóvel: T2 Martim Moniz, Rossio - Martim Moniz, Lisboa"
+            }
+        };
+
+        function getUrlParameter(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function switchLanguage(lang) {
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            const selectedContent = document.getElementById(`content-${lang}`);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            } else {
+                document.getElementById('content-en').classList.add('active');
+                lang = 'en';
+            }
+
+            if (languages[lang]) {
+                document.getElementById('main-title').textContent = languages[lang].title;
+                document.getElementById('property-address').textContent = languages[lang].address;
+            }
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById(`btn-${lang}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            document.documentElement.lang = lang;
+
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('lang', lang);
+            window.history.replaceState(null, '', newUrl);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlLang = getUrlParameter('lang');
+            const defaultLang = urlLang && ['en', 'pt'].includes(urlLang) ? urlLang : 'en';
+            switchLanguage(defaultLang);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('href').split('=')[1];
+                    switchLanguage(lang);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
